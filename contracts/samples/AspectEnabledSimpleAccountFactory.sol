@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/utils/Create2.sol";
 import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
 import "./AspectEnabledSimpleAccount.sol";
+import "../interfaces/IEntryPoint.sol";
 
 /**
  * A sample factory contract for SimpleAccount
