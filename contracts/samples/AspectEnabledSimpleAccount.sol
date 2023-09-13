@@ -22,6 +22,8 @@ contract AspectEnabledSimpleAccount is SimpleAccount {
 
     mapping(address => bool) private _aspectWhitelist;
 
+    constructor(IEntryPoint anEntryPoint) SimpleAccount(anEntryPoint) {}
+
     /**
      * Validate user's signature and nonce.
      * Subclass doesn't need to override this method. Instead,
@@ -71,7 +73,7 @@ contract AspectEnabledSimpleAccount is SimpleAccount {
     /// implement template method of BaseAspectEnabledAccount
     // solhint-disable-next-line no-unused-vars
     function _validateAspectId(address aspectId)
-    internal override virtual returns (uint256 validationData) {
+    internal virtual returns (uint256 validationData) {
         if (_aspectWhitelist[aspectId]) {
             return 0;
         }

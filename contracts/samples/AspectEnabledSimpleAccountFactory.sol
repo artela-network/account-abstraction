@@ -34,7 +34,7 @@ contract AspectEnabledSimpleAccountFactory {
         }
         ret = AspectEnabledSimpleAccount(payable(new ERC1967Proxy{salt : bytes32(salt)}(
                 address(accountImplementation),
-                abi.encodeCall(AspectEnabledSimpleAccount.initialize, (owner))
+                abi.encodeCall(SimpleAccount.initialize, (owner))
             )));
     }
 
@@ -46,7 +46,7 @@ contract AspectEnabledSimpleAccountFactory {
                 type(ERC1967Proxy).creationCode,
                 abi.encode(
                     address(accountImplementation),
-                    abi.encodeCall(AspectEnabledSimpleAccount.initialize, (owner))
+                    abi.encodeCall(SimpleAccount.initialize, (owner))
                 )
             )));
     }
