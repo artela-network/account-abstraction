@@ -54,7 +54,7 @@ contract AspectEnabledSimpleAccount is SimpleAccount {
      * @dev add a set of Aspect to whitelist
      */
     function approveAspects(address[] calldata aspectIds) external {
-        _requireFromEntryPointOrOwner();
+        _requireFromSelfOrOwner();
         for (uint256 i = 0; i < aspectIds.length; ++i) {
             _aspectWhitelist[aspectIds[i]] = true;
         }
@@ -64,7 +64,7 @@ contract AspectEnabledSimpleAccount is SimpleAccount {
      * @dev remove a set of Aspect from the whitelist
      */
     function disApproveAspects(address[] calldata aspectIds) external {
-        _requireFromEntryPointOrOwner();
+        _requireFromSelfOrOwner();
         for (uint256 i = 0; i < aspectIds.length; ++i) {
             delete _aspectWhitelist[aspectIds[i]];
         }
@@ -93,6 +93,11 @@ contract AspectEnabledSimpleAccount is SimpleAccount {
             mstore(add(result, 0x20), _data)
         }
         return result;
+    }
+
+    // Require the function call went through Self or owner
+    function _requireFromSelfOrOwner() internal view {
+        require(msg.sender == address(this) || msg.sender == owner, "account: not Owner or Self");
     }
 }
 
