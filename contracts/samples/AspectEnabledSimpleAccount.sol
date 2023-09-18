@@ -45,7 +45,6 @@ contract AspectEnabledSimpleAccount is SimpleAccount {
             (bool success, bytes memory returnData) = address(0x65).call(bytes32ToBytes(userOpHash));
             validationData = success ? _validateAspectId(bytesToAddress(returnData)) : ASPECT_VALIDATION_FAILED;
         }
-        validationData = _validateSignature(userOp, userOpHash);
         _validateNonce(userOp.nonce);
         _payPrefund(missingAccountFunds);
     }
