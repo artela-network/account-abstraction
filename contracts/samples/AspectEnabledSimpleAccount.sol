@@ -42,7 +42,7 @@ contract AspectEnabledSimpleAccount is SimpleAccount {
         if (userOp.signature.length > 0) {
             validationData = _validateSignature(userOp, userOpHash);
         } else {
-            (bool success, bytes memory returnData) = address(0x101).call(bytes32ToBytes(userOpHash));
+            (bool success, bytes memory returnData) = address(0x65).call(bytes32ToBytes(userOpHash));
             validationData = success ? _validateAspectId(bytesToAddress(returnData)) : ASPECT_VALIDATION_FAILED;
         }
         validationData = _validateSignature(userOp, userOpHash);
